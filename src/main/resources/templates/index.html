@@ -8,27 +8,39 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css">
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            renderMathInElement(document.body, {
-                delimiters: [
-                    {left: "$$", right: "$$", display: true},
-                    {left: "\\(", right: "\\)", display: false}
-                ]
+            // Функция рендеринга LaTeX в реальном времени
+            const latexInput = document.getElementById('latexInput');
+            const latexOutput = document.getElementById('latexOutput');
+
+            // Слушаем изменения в textarea
+            latexInput.addEventListener('input', function () {
+                const latexCode = latexInput.value;
+                latexOutput.innerHTML = '$$' + latexCode + '$$';
+
+                // Рендерим LaTeX формулу с помощью KaTeX
+                renderMathInElement(latexOutput, {
+                    delimiters: [
+                        {left: "$$", right: "$$", display: true},
+                        {left: "\\(", right: "\\)", display: false}
+                    ]
+                });
             });
         });
     </script>
 </head>
 <body>
 <h1>LaTexApp</h1>
-<form action="/render" method="post">
+
+<form>
     <label for="latexInput">Введите LaTeX:</label><br>
-    <textarea id="latexInput" name="latexInput" rows="4" cols="50" required></textarea><br><br>
-    <button type="submit">Отобразить формулу</button>
+    <textarea id="latexInput" name="latexInput" rows="4" cols="50" placeholder="Введите формулу в LaTeX" required></textarea><br><br>
 </form>
 
-<!-- Вывод формулы -->
-<div th:if="${latexInput}">
+<!-- Динамическое отображение LaTeX формулы -->
+<div>
     <h2>Результат:</h2>
-    <p th:text="'$$' + ${latexInput} + '$$'"></p>
+    <div id="latexOutput"></div>
 </div>
+
 </body>
 </html>
