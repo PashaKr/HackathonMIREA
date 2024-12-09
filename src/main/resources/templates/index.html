@@ -9,27 +9,8 @@
     <script type="text/javascript" src="/katex/auto-render.min.js"></script>
     <link rel="stylesheet" href="/katex/katex.min.css">
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Функция рендеринга LaTeX в реальном времени
-            const latexInput = document.getElementById('latexInput');
-            const latexOutput = document.getElementById('latexOutput');
-
-            // Слушаем изменения в textarea
-            latexInput.addEventListener('input', function () {
-                const latexCode = latexInput.value;
-                latexOutput.innerHTML = '$$' + latexCode + '$$';
-
-                // Рендерим LaTeX формулу с помощью KaTeX
-                renderMathInElement(latexOutput, {
-                    delimiters: [
-                        {left: "$$", right: "$$", display: true},
-                        {left: "\\(", right: "\\)", display: false}
-                    ]
-                });
-            });
-        });
-    </script>
+    <!-- Подключаем файл для визуализации latex -->
+    <script type="text/javascript" src="/js/latex-renderer.js"></script>
 </head>
 <body>
 <h1>LaTexApp</h1>
