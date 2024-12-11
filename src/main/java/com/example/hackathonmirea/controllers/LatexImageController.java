@@ -17,6 +17,11 @@ public class LatexImageController {
     @PostMapping("/save-image")
     public ResponseEntity<String> saveLatexImage(@RequestBody LatexRequest request) {
         try {
+            // Проверка: пустая ли форма с формулой
+            if (request.getLatex() == null || request.getLatex().trim().isEmpty()) {
+                throw new IllegalArgumentException("Формула LaTeX не введена.");
+            }
+
             // Создание формулы из LaTeX
             TeXFormula formula = new TeXFormula(request.getLatex());
             TeXIcon icon = formula.createTeXIcon(TeXFormula.SERIF, 20);
@@ -40,6 +45,8 @@ public class LatexImageController {
             ImageIO.write(image, "png", outputFile);
 
             return ResponseEntity.ok("Изображение сохранено в папке Загрузки: " + outputFile.getAbsolutePath());
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(500).body("Ошибка при сохранении изображения: " + e.getMessage());
