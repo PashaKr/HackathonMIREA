@@ -7,22 +7,12 @@
     <!-- Подключение внешнего стиля -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/katex/katex.min.css">
+    <link rel="stylesheet" href="/css/categories.css">
 
     <!-- Подключение KaTeX для рендеринга формул -->
     <script type="text/javascript" src="/katex/katex.min.js"></script>
     <script type="text/javascript" src="/katex/auto-render.min.js"></script>
 
-    <!-- Расстояние между кнопками-->
-    <style>
-        .categories {
-            margin-bottom: 20px; /* Отступ между рядами */
-        }
-
-        .button-group {
-            display: flex;
-            gap: 10px; /* Пространство между кнопками в одном ряду */
-        }
-    </style>
 </head>
 <body>
 <h1>LaTexApp</h1>
@@ -61,6 +51,12 @@
     </div>
 </div>
 
+<!-- Кнопка "Сохранить изображение" -->
+<div class="save-button">
+    <button id="saveImageButton" type="button" class="btn btn-success">
+        Сохранить изображение
+    </button>
+</div>
 
 <!-- Форма для ввода LaTeX -->
 <form id="latexForm">
@@ -69,13 +65,13 @@
 </form>
 
 <!-- Модальные окна -->
-<th:block th:include="fragments/modal_constructions :: modal"></th:block>
-<th:block th:include="fragments/modal_symbols :: modal"></th:block>
-<th:block th:include="fragments/modal_operators :: modal"></th:block>
-<th:block th:include="fragments/modal_environments :: modal"></th:block>
-<th:block th:include="fragments/modal_relations :: modal"></th:block>
-<th:block th:include="fragments/modal_matrices :: modal"></th:block>
-<th:block th:include="fragments/modal_modifications :: modal"></th:block>
+<th:block th:insert="~{fragments/modal_constructions :: modal}"></th:block>
+<th:block th:insert="~{fragments/modal_symbols :: modal}"></th:block>
+<th:block th:insert="~{fragments/modal_operators :: modal}"></th:block>
+<th:block th:insert="~{fragments/modal_environments :: modal}"></th:block>
+<th:block th:insert="~{fragments/modal_relations :: modal}"></th:block>
+<th:block th:insert="~{fragments/modal_matrices :: modal}"></th:block>
+<th:block th:insert="~{fragments/modal_modifications :: modal}"></th:block>
 
 <!-- Динамическое отображение LaTeX формулы -->
 <div>
@@ -86,6 +82,7 @@
 <!-- Подключение JS логики -->
 <script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript" src="/js/latex-renderer.js"></script>
+<script type="text/javascript" src="/js/image-render.js"></script>
 
 </body>
 </html>

@@ -1,0 +1,8 @@
+.categories {
+    margin-bottom: 20px; /* Отступ между рядами */
+}
+
+.button-group {
+    display: flex;
+    gap: 10px; /* Пространство между кнопками в одном ряду */
+}
