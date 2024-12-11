@@ -1,0 +1,17 @@
+<th:block th:fragment="modal">
+  <div class="modal fade" id="environmentsModal" tabindex="-1" aria-labelledby="environmentsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title" id="environmentsModalLabel">Окружения</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+      <div class = "modal-body">
+      <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\begin{equation}\n\n\\end{equation}')">Уравнение</button>
+      <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\begin{align}\n\n\\end{align}')">Выровненные уравнения</button>
+      <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\begin{array}{c}\n\n\\end{array}')">Таблица</button>
+      </div>
+    </div>
+    </div>
+  </div>
+</th:block>

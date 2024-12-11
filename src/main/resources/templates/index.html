@@ -1,98 +1,91 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>LaTexApp</title>
 
-    <!-- Подключаем KaTeX -->
-    <script type="text/javascript" src="/katex/katex.min.js"></script>
-    <script type="text/javascript" src="/katex/auto-render.min.js"></script>
+    <!-- Подключение внешнего стиля -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/katex/katex.min.css">
 
-    <!-- Подключаем внешний CSS файл -->
-    <link rel="stylesheet" href="/css/styles.css">
+    <!-- Подключение KaTeX для рендеринга формул -->
+    <script type="text/javascript" src="/katex/katex.min.js"></script>
+    <script type="text/javascript" src="/katex/auto-render.min.js"></script>
 
-    <!-- Подключаем внешний JavaScript файл -->
-    <script type="text/javascript" src="/js/latex-renderer.js"></script>
+    <!-- Расстояние между кнопками-->
+    <style>
+        .categories {
+            margin-bottom: 20px; /* Отступ между рядами */
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px; /* Пространство между кнопками в одном ряду */
+        }
+    </style>
 </head>
 <body>
 <h1>LaTexApp</h1>
 
+<!-- Кнопки категорий верхний ряд-->
+<div class="categories">
+    <div class="button-group">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#constructionsModal">
+            Базовые конструкции
+        </button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#symbolsModal">
+            Греческие буквы и специальные символы
+        </button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#operatorsModal">
+            Операторы и функции
+        </button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#environmentsModal">
+            Окружения
+        </button>
+    </div>
+</div>
+
+
+<!--Кнопки категорий нижний ряд-->
+<div class="categories">
+    <div class="button-group">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#relationsModal">
+            Стрелки и отношения
+        </button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#matricesModal">
+            Матрицы и массивы
+        </button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modificationsModal">
+            Модификации символов
+        </button>
+    </div>
+</div>
+
+
 <!-- Форма для ввода LaTeX -->
-<form>
+<form id="latexForm">
     <label for="latexInput">Введите LaTeX:</label><br>
     <textarea id="latexInput" name="latexInput" rows="4" cols="50" placeholder="Введите формулу в LaTeX" required></textarea><br><br>
 </form>
 
-<!-- Кнопки категорий для вызова модальных окон -->
-<div>
-    <button type="button" onclick="openModal('operationsModal')">Операции</button>
-    <button type="button" onclick="openModal('rootsModal')">Корни и степени</button>
-    <button type="button" onclick="openModal('integralsModal')">Интегралы и суммы</button>
-    <button type="button" onclick="openModal('othersModal')">Прочее</button>
-</div>
-
-<!-- Модальное окно для операций -->
-<div id="operationsModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal('operationsModal')">&times;</span>
-        <h3>Операции</h3>
-        <div class="button-container">
-            <button type="button" onclick="addSymbol('x^n')">xⁿ</button>
-            <button type="button" onclick="addSymbol('\\frac{a}{b}')">a/b</button>
-            <button type="button" onclick="addSymbol('x_1')">x₁</button>
-            <button type="button" onclick="addSymbol('\\pm')">±</button>
-        </div>
-    </div>
-</div>
-
-<!-- Модальное окно для корней и степеней -->
-<div id="rootsModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal('rootsModal')">&times;</span>
-        <h3>Корни и степени</h3>
-        <div class="button-container">
-            <button type="button" onclick="addSymbol('\\sqrt{x}')">√x</button>
-            <button type="button" onclick="addSymbol('\\sqrt[n]{x}')">√[n]x</button>
-            <button type="button" onclick="addSymbol('x^2')">x²</button>
-            <button type="button" onclick="addSymbol('x^{n}')">xⁿ</button>
-        </div>
-    </div>
-</div>
-
-<!-- Модальное окно для интегралов и сумм -->
-<div id="integralsModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal('integralsModal')">&times;</span>
-        <h3>Интегралы и суммы</h3>
-        <div class="button-container">
-            <button type="button" onclick="addSymbol('\\int_{a}^{b}')">∫</button>
-            <button type="button" onclick="addSymbol('\\sum_{i=1}^{n}')">Σ</button>
-            <button type="button" onclick="addSymbol('\\prod_{i=1}^{n}')">Π</button>
-        </div>
-    </div>
-</div>
-
-<!-- Модальное окно для прочих символов -->
-<div id="othersModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal('othersModal')">&times;</span>
-        <h3>Прочее</h3>
-        <div class="button-container">
-            <button type="button" onclick="addSymbol('\\alpha')">α</button>
-            <button type="button" onclick="addSymbol('\\beta')">β</button>
-            <button type="button" onclick="addSymbol('\\gamma')">γ</button>
-            <button type="button" onclick="addSymbol('\\infty')">∞</button>
-            <button type="button" onclick="addSymbol('\\pi')">π</button>
-        </div>
-    </div>
-</div>
+<!-- Модальные окна -->
+<th:block th:include="fragments/modal_constructions :: modal"></th:block>
+<th:block th:include="fragments/modal_symbols :: modal"></th:block>
+<th:block th:include="fragments/modal_operators :: modal"></th:block>
+<th:block th:include="fragments/modal_environments :: modal"></th:block>
+<th:block th:include="fragments/modal_relations :: modal"></th:block>
+<th:block th:include="fragments/modal_matrices :: modal"></th:block>
+<th:block th:include="fragments/modal_modifications :: modal"></th:block>
 
 <!-- Динамическое отображение LaTeX формулы -->
 <div>
     <h2>Результат:</h2>
     <div id="latexOutput"></div>
 </div>
+
+<!-- Подключение JS логики -->
+<script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="/js/latex-renderer.js"></script>
 
 </body>
 </html>

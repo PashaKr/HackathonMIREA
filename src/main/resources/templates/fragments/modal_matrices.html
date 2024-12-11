@@ -1,0 +1,88 @@
+<th:block th:fragment="modal">
+    <!-- Modal -->
+    <div class="modal fade" id="matricesModal" tabindex="-1" aria-labelledby="matricesModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="matricesModalLabel">Матрицы и массивы</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="matrix-options d-flex justify-content-center mb-3 gap-3">
+                        <div class="matrix-option selected p-2 border rounded" data-type="matrix">
+                            matrix
+                        </div>
+                        <div class="matrix-option p-2 border rounded" data-type="pmatrix">
+                            ( )
+                        </div>
+                        <div class="matrix-option p-2 border rounded" data-type="bmatrix">
+                            [ ]
+                        </div>
+                        <div class="matrix-option p-2 border rounded" data-type="vmatrix">
+                            | |
+                        </div>
+                        <div class="matrix-option p-2 border rounded" data-type="Bmatrix">
+                            { }
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="rows">Строки:</label>
+                        <input type="number" id="rows" class="form-control" value="3" min="1">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="columns">Столбцы:</label>
+                        <input type="number" id="columns" class="form-control" value="3" min="1">
+                    </div>
+                    <div class="text-center">
+                        <button id="applyButton" class="btn btn-primary">Применить</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* Дополнительные стили */
+        .matrix-option.selected {
+            border-color: #007bff;
+            background-color: #e9ecef;
+        }
+    </style>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const rowsInput = document.getElementById('rows');
+            const columnsInput = document.getElementById('columns');
+            const applyButton = document.getElementById('applyButton');
+            const latexInput = document.getElementById('latexInput'); // Ссылка на поле ввода LaTeX
+
+            // Функция генерации LaTeX
+            applyButton.addEventListener('click', () => {
+                const selectedType = document.querySelector('.matrix-option.selected').dataset.type;
+                const rows = parseInt(rowsInput.value, 10);
+                const columns = parseInt(columnsInput.value, 10);
+                let latex = `\\begin{${selectedType}}\n`;
+
+                for (let i = 0; i < rows; i++) {
+                    latex += ' '.repeat(4); // Indent
+                    latex += ' & '.repeat(columns - 1) + ' \\\\';
+                    if (i < rows - 1) latex += '\n';
+                }
+
+                latex += `\n\\end{${selectedType}}`;
+
+                // Вставляем сгенерированный LaTeX в поле ввода на основной странице
+                latexInput.value = latex;
+            });
+
+            // Выбор типа матрицы
+            const options = document.querySelectorAll('.matrix-option');
+            options.forEach(option => {
+                option.addEventListener('click', () => {
+                    options.forEach(opt => opt.classList.remove('selected'));
+                    option.classList.add('selected');
+                });
+            });
+        });
+    </script>
+</th:block>

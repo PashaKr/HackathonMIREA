@@ -1,0 +1,78 @@
+<th:block th:fragment="modal">
+  <div class="modal fade" id="operatorsModal" tabindex="-1" aria-labelledby="operatorsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title" id="operatorsModalLabel">Операторы и функции</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h3>Тригонометрические функции</h3>
+          <div class="button-container">
+            <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\sin')">sin</button>
+            <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\cos')">cos</button>
+            <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\tan')">tan</button>
+            <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\cot')">cot</button>
+            <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\sec')">sec</button>
+            <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\csc')">csc</button>
+            <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\sinh')">sinh</button>
+            <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\cosh')">cosh</button>
+            <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\tanh')">tanh</button>
+            <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\coth')">coth</button>
+          </div>
+
+          <h3>Обратные тригонометрические функции</h3>
+          <div class="button-container">
+            <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\arcsin')">arcsin</button>
+            <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\arccos')">arccos</button>
+            <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\arctan')">arctan</button>
+            <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\textrm{arccsc}')">arccsc</button>
+            <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\textrm{arcsec}')">arcsec</button>
+            <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\textrm{arccot}')">arccot</button>
+            <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\textrm{argsinh}')">argsinh</button>
+            <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\textrm{argcosh}')">argcosh</button>
+            <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\textrm{argtanh}')">argtanh</button>
+          </div>
+
+          <h3>Другие функции</h3>
+          <div class="button-container">
+            <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\log')">log</button>
+            <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\ln')">ln</button>
+            <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\exp')">exp</button>
+            <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\sqrt')">sqrt</button>
+          </div>
+
+          <h3>Операторы</h3>
+          <div class="button-container">
+            <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\min')">min</button>
+            <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\max')">max</button>
+            <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\sup')">sup</button>
+            <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\inf')">inf</button>
+            <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\lim')">lim</button>
+            <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\det')">det</button>
+            <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\gcd')">gcd</button>
+            <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\lcm')">lcm</button>
+            <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\mod')">mod</button>
+            <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\deg')">deg</button>
+            <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\arg')">arg</button>
+          </div>
+
+          <h3>Суммы и произведения</h3>
+          <div class="button-container">
+            <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\sum_{i=1}^{n}')">Σ</button>
+            <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\prod_{i=1}^{n}')">Π</button>
+            <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\coprod')">coprod</button>
+          </div>
+
+          <h3>Интегралы</h3>
+          <div class="button-container">
+            <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\int')">∫</button>
+            <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\iint')">∬</button>
+            <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\iiint')">∭</button>
+            <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\oint')">∮</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</th:block>

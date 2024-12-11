@@ -1,0 +1,100 @@
+<th:block th:fragment="modal">
+    <div class="modal fade" id="symbolsModal" tabindex="-1" aria-labelledby="symbolsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="symbolsModalLabel">Греческие буквы и специальные символы</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h3>Греческие буквы</h3>
+                    <h4>Строчные</h4>
+                    <div class="button-container">
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\alpha')">α</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\beta')">β</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\gamma')">γ</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\delta')">δ</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\epsilon')">ε</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\zeta')">ζ</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\eta')">η</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\theta')">θ</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\iota')">ι</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\kappa')">κ</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\lambda')">λ</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\mu')">μ</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\nu')">ν</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\xi')">ξ</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\omicron')">ο</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\pi')">π</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\rho')">ρ</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\sigma')">σ</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\tau')">τ</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\upsilon')">υ</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\phi')">φ</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\chi')">χ</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\psi')">ψ</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\omega')">ω</button>
+                    </div>
+
+                    <h4>Прописные</h4>
+                    <div class="button-container">
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\Alpha')">Α</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\Beta')">Β</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\Gamma')">Γ</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\Delta')">Δ</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\Epsilon')">Ε</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\Zeta')">Ζ</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\Eta')">Η</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\Theta')">Θ</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\Iota')">Ι</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\Kappa')">Κ</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\Lambda')">Λ</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\Mu')">Μ</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\Nu')">Ν</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\Xi')">Ξ</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\Omicron')">Ο</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\Pi')">Π</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\Rho')">Ρ</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\Sigma')">Σ</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\Tau')">Τ</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\Upsilon')">Υ</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\Phi')">Φ</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\Chi')">Χ</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\Psi')">Ψ</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\Omega')">Ω</button>
+                    </div>
+
+                    <h3>Теоретико-множественные операции</h3>
+                    <div class="button-container">
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\cup')">∪</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\cap')">∩</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\setminus')">\</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\subset')">⊂</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\supset')">⊃</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\subseteq')">⊆</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\supseteq')">⊇</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\in')">∈</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\notin')">∉</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\emptyset')">∅</button>
+                    </div>
+
+                    <h3>Специальные символы</h3>
+                    <div class="button-container">
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\infty')">∞</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\forall')">∀</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\exists')">∃</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\neg')">¬</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\wedge')">∧</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\vee')">∨</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\oplus')">⊕</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\otimes')">⊗</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\partial')">∂</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\nabla')">∇</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\cdot')">·</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\times')">×</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>

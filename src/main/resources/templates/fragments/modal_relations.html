@@ -1,0 +1,69 @@
+<th:block th:fragment="modal">
+    <div class="modal fade" id="relationsModal" tabindex="-1" aria-labelledby="relationsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="relationsModalLabel">Стрелки и отношения</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h3>Стрелки</h3>
+                    <div class="button-container">
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\rightarrow')">→</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\leftarrow')">←</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\leftrightarrow')">↔</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\uparrow')">↑</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\downarrow')">↓</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\updownarrow')">↕</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\Rightarrow')">⇒</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\Leftarrow')">⇐</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\Leftrightarrow')">⇔</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\Uparrow')">⇑</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\Downarrow')">⇓</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\Updownarrow')">⇕</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\mapsto')">↦</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\longrightarrow')">⟶</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\longleftarrow')">⟵</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\longleftrightarrow')">⟷</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\Longrightarrow')">⟹</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\Longleftarrow')">⟸</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\Longleftrightarrow')">⟺</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\hookrightarrow')">↪</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\hookleftarrow')">↩</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\rightharpoonup')">⇀</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\rightharpoondown')">⇁</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\leftharpoonup')">↼</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\leftharpoondown')">↽</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\rightleftharpoons')">⇌</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\leftrightharpoons')">⇋</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\looparrowright')">↬</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\looparrowleft')">↫</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\twoheadrightarrow')">↠</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\twoheadleftarrow')">↞</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\dashrightarrow')">⇢</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\dashleftarrow')">⇠</button>
+                    </div>
+
+                    <h3>Знаки сравнения и отношения</h3>
+                    <div class="button-container">
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('=')">=</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('<')">&lt;</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('>')">&gt;</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\leq')">≤</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\geq')">≥</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\neq')">≠</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\approx')">≈</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\sim')">∼</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\equiv')">≡</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\subset')">⊂</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\supset')">⊃</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\subseteq')">⊆</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\supseteq')">⊇</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\in')">∈</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\notin')">∉</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>

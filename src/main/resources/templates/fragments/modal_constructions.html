@@ -1,0 +1,41 @@
+<!-- Определяем фрагмент с помощью th:fragment -->
+<th:block th:fragment="modal">
+  <div class="modal fade" id="constructionsModal" tabindex="-1" aria-labelledby="constructionsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title" id="constructionsModalLabel">Базовые конструкции</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h3>Дроби</h3>
+          <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\frac{a}{b}')">a/b</button>
+
+          <h3>Корни</h3>
+          <div class="button-container">
+            <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\sqrt{x}')">√x</button>
+            <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\sqrt[n]{x}')">√[n]x</button>
+          </div>
+
+          <h3>Индексы и показатели</h3>
+          <div class="button-container">
+            <button type="button" class="btn btn-outline-primary" onclick="addSymbol('x^n')">xⁿ</button>
+            <button type="button" class="btn btn-outline-primary" onclick="addSymbol('x_1')">x₁</button>
+          </div>
+
+          <h3>Суммы</h3>
+          <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\sum_{i=1}^{n}')">Σ</button>
+
+          <h3>Произведения</h3>
+          <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\prod_{i=1}^{n}')">Π</button>
+
+          <h3>Интегралы</h3>
+          <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\int_{a}^{b}')">∫</button>
+
+          <h3>Пределы</h3>
+          <button type="button" class="btn btn-outline-primary" onclick="addSymbol('\\lim_{x \\to a}')">lim</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</th:block>
