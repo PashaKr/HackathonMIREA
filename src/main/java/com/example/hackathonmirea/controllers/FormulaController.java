@@ -14,6 +14,12 @@ public class FormulaController {
     @PostMapping("/saveFormula")
     public String saveFormula(@RequestBody Map<String, String> body) {
         String formula = body.get("formula");
+
+        // Проверка на пустую форму
+        if (formula == null || formula.trim().isEmpty()) {
+            return "Формула LaTeX не введена.";
+        }
+
         // Проверяем, существует ли уже такая формула
         if (dbHandler.isFormulaExists(formula)) {
             return "Формула уже сохранена";
