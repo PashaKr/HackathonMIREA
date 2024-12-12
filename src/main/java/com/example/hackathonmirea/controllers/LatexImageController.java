@@ -40,8 +40,10 @@ public class LatexImageController {
                 downloadsDir.mkdirs(); // Создать папку Загрузки, если её нет
             }
 
+            // Создание уникального имени файла
+            File outputFile = generateUniqueFileName(downloadsDir, "latex-image", "png");
+
             // Сохранение изображения в папку Загрузки
-            File outputFile = new File(downloadsDir, "latex-image.png");
             ImageIO.write(image, "png", outputFile);
 
             return ResponseEntity.ok("Изображение сохранено в папке Загрузки: " + outputFile.getAbsolutePath());
@@ -52,6 +54,20 @@ public class LatexImageController {
             return ResponseEntity.status(500).body("Ошибка при сохранении изображения: " + e.getMessage());
         }
     }
+
+
+    private File generateUniqueFileName(File directory, String baseName, String extension) {
+        File file = new File(directory, baseName + "." + extension);
+        int count = 1;
+
+        while (file.exists()) {
+            file = new File(directory, baseName + " (" + count + ")." + extension);
+            count++;
+        }
+
+        return file;
+    }
+
 
     // Класс для запроса
     static class LatexRequest {

@@ -52,22 +52,18 @@ document.addEventListener("DOMContentLoaded", function () {
     // Сохранение формулы в изображение
     saveImageButton.addEventListener('click', function () {
         const svg = latexOutput.querySelector('svg');
-        if (svg) {
-            const serializer = new XMLSerializer();
-            const svgBlob = new Blob([serializer.serializeToString(svg)], { type: 'image/svg+xml;charset=utf-8' });
-            const url = URL.createObjectURL(svgBlob);
+        const serializer = new XMLSerializer();
+        const svgBlob = new Blob([serializer.serializeToString(svg)], { type: 'image/svg+xml;charset=utf-8' });
+        const url = URL.createObjectURL(svgBlob);
 
-            const downloadLink = document.createElement('a');
-            downloadLink.href = url;
-            downloadLink.download = 'formula.svg';
-            document.body.appendChild(downloadLink);
-            downloadLink.click();
-            document.body.removeChild(downloadLink);
+        const downloadLink = document.createElement('a');
+        downloadLink.href = url;
+        downloadLink.download = 'formula.svg';
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
 
-            URL.revokeObjectURL(url);
-        } else {
-            alert('Нет формулы для сохранения. Пожалуйста, введите корректный LaTeX.');
-        }
+        URL.revokeObjectURL(url);
     });
 
     // Загружаем сохраненные формулы и отображаем их в модальном окне
