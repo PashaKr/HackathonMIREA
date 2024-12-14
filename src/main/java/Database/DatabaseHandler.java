@@ -8,9 +8,28 @@ public class DatabaseHandler extends Configs {
     private Connection dbConnection;
 
     public Connection getDbConnection() throws ClassNotFoundException, SQLException {
-        String connectionString = "jdbc:mysql://" + dbHost + ":" + dbPort + "/" + dbName;
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        return DriverManager.getConnection(connectionString, dbUser, dbPass);
+        String connectionString = "jdbc:sqlite:" + dbPath;
+        Class.forName("org.sqlite.JDBC");
+        return DriverManager.getConnection(connectionString);
+    }
+
+    public void initializeDatabase() {
+        String createTableQuery = """
+            CREATE TABLE IF NOT EXISTS autoplagiat (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                formula TEXT NOT NULL UNIQUE
+            );
+        """;
+
+        try {
+            dbConnection = getDbConnection();
+            Statement statement = dbConnection.createStatement();
+            statement.execute(createTableQuery);
+        } catch (SQLException | ClassNotFoundException e) {
+            System.err.println("Ошибка при создании таблицы: " + e.getMessage());
+        } finally {
+            closeConnection();
+        }
     }
 
     public boolean isFormulaExists(String formula) {
@@ -21,14 +40,14 @@ public class DatabaseHandler extends Configs {
             preparedStatement.setString(1, formula);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next() && resultSet.getInt("count") > 0) {
-                return true; // Формула уже существует
+                return true;
             }
         } catch (SQLException | ClassNotFoundException e) {
             System.err.println("Ошибка при проверке существования формулы: " + e.getMessage());
         } finally {
             closeConnection();
         }
-        return false; // Формулы нет в базе данных
+        return false;
     }
 
     public void addFormula(String formula) {
@@ -38,25 +57,12 @@ public class DatabaseHandler extends Configs {
             PreparedStatement preparedStatement = dbConnection.prepareStatement(insertQuery);
             preparedStatement.setString(1, formula);
             preparedStatement.executeUpdate();
-            System.out.println("Формула добавлена: " + formula);
         } catch (SQLException | ClassNotFoundException e) {
             System.err.println("Ошибка при добавлении формулы: " + e.getMessage());
-            e.printStackTrace();
         } finally {
             closeConnection();
         }
     }
-
-    private void closeConnection() {
-        try {
-            if (dbConnection != null && !dbConnection.isClosed()) {
-                dbConnection.close();
-            }
-        } catch (SQLException e) {
-            System.err.println("Ошибка при закрытии соединения: " + e.getMessage());
-        }
-    }
-
 
     public List<String> getAllFormulas() {
         List<String> formulas = new ArrayList<>();
@@ -72,16 +78,20 @@ public class DatabaseHandler extends Configs {
             }
         } catch (SQLException | ClassNotFoundException e) {
             System.err.println("Ошибка при загрузке формул: " + e.getMessage());
-            e.printStackTrace();
         } finally {
-            try {
-                if (dbConnection != null && !dbConnection.isClosed()) {
-                    dbConnection.close();
-                }
-            } catch (SQLException e) {
-                System.err.println("Ошибка при закрытии соединения: " + e.getMessage());
-            }
+            closeConnection();
         }
         return formulas;
+    }
+
+
+    private void closeConnection() {
+        try {
+            if (dbConnection != null && !dbConnection.isClosed()) {
+                dbConnection.close();
+            }
+        } catch (SQLException e) {
+            System.err.println("Ошибка при закрытии соединения: " + e.getMessage());
+        }
     }
 }

@@ -8,25 +8,19 @@ document.getElementById("saveFormulaButton").addEventListener("click", () => {
         },
         body: JSON.stringify({ formula: formula }),
     }).then(response => {
-        // Проверяем статус ответа от сервера
         if (response.ok) { // Если статус 2xx
-            return response.text(); // Получаем текст ответа
+            return response.text();
         } else {
             return response.text().then(text => {
-                // Если не 2xx, возвращаем ошибку с сообщением
                 throw new Error(text);
             });
         }
     }).then(message => {
-        // Вставляем текстовое сообщение от сервера
         alert(message);
     }).catch(error => {
-        // Обработка ошибок
         alert("Ошибка: " + error.message);
     });
 });
-
-
 
 // Обработчик для загрузки сохранённых формул
 document.getElementById("loadFormulasButton").addEventListener("click", () => {
@@ -39,18 +33,12 @@ document.getElementById("loadFormulasButton").addEventListener("click", () => {
             data.forEach(formula => {
                 const formulaElement = document.createElement("div");
                 formulaElement.classList.add("formula-item");
-                formulaElement.innerHTML = `$$${formula}$$`;
+
+                // Убираем LaTeX разметку KaTeX, чтобы вернуть чистый LaTeX
+                const cleanFormula = formula.replace(/<[^>]*>/g, '');  // Убираем HTML теги, оставляем только текст
+
+                formulaElement.innerHTML = `$$${cleanFormula}$$`; // Оборачиваем формулу в $$ для корректного отображения в LaTeX
                 formulasList.appendChild(formulaElement);
-
-                // Добавляем обработчик клика на формулу
-                formulaElement.addEventListener('click', function () {
-                    // Вставляем формулу в textarea
-                    const latexInput = document.getElementById("latexInput");
-                    latexInput.value += formula; // Добавляем формулу в конец текста в textarea
-
-                    // Обновляем вывод LaTeX немедленно
-                    updateLatexOutput();
-                });
             });
 
             // Рендеринг формул с использованием KaTeX
@@ -61,6 +49,26 @@ document.getElementById("loadFormulasButton").addEventListener("click", () => {
                 ]
             });
 
+            // Добавляем обработчики кликов
+            setTimeout(() => {
+                const formulaItems = document.querySelectorAll('.formula-item');
+                formulaItems.forEach(formulaElement => {
+                    formulaElement.addEventListener('click', function() {
+                        const latexInput = document.getElementById("latexInput");
+
+                        // Извлекаем чистый LaTeX из элемента
+                        const formulaText = extractLatexFromHTML(formulaElement.innerHTML);  // Функция извлечения LaTeX
+
+                        // Добавляем формулу в input
+                        latexInput.value += formulaText;
+
+                        // Обновляем LaTeX вывод
+                        updateLatexOutput();
+                    });
+                });
+                console.log("Обработчики кликов добавлены");
+            }, 100);  // Немного задержки для рендеринга
+
             // Открыть модальное окно с формулами
             const modal = new bootstrap.Modal(document.getElementById("formulasModal"));
             modal.show();
@@ -69,3 +77,28 @@ document.getElementById("loadFormulasButton").addEventListener("click", () => {
             alert("Ошибка при загрузке формул.");
         });
 });
+
+// Функция для извлечения LaTeX из HTML
+function extractLatexFromHTML(html) {
+    // Используем регулярные выражения для извлечения LaTeX-кода из атрибута annotation
+    const match = html.match(/<annotation encoding="application\/x-tex">([^<]+)<\/annotation>/);
+    if (match) {
+        return match[1];  // Возвращаем LaTeX-код
+    }
+    return '';  // Если LaTeX не найден, возвращаем пустую строку
+}
+
+// Функция для обновления формулы
+function updateLatexOutput() {
+    const latexInput = document.getElementById('latexInput');
+    const latexOutput = document.getElementById('latexOutput');
+    const latexCode = latexInput.value;
+    latexOutput.innerHTML = '$$' + latexCode + '$$'; // Добавление формулы в LaTeX
+
+    renderMathInElement(latexOutput, {
+        delimiters: [
+            { left: "$$", right: "$$", display: true },
+            { left: "\\(", right: "\\)", display: false }
+        ]
+    });
+}

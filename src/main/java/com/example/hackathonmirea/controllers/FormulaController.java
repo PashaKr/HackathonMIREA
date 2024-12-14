@@ -11,6 +11,11 @@ import java.util.Map;
 public class FormulaController {
     private final DatabaseHandler dbHandler = new DatabaseHandler();
 
+    // Инициализация базы данных
+    public FormulaController() {
+        dbHandler.initializeDatabase();  // Добавляем инициализацию базы данных при запуске контроллера
+    }
+
     @PostMapping("/saveFormula")
     public String saveFormula(@RequestBody Map<String, String> body) {
         String formula = body.get("formula");
