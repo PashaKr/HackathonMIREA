@@ -5,15 +5,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import Database.DatabaseHandler;
 
 public class MarkdownParser {
-
-    // Регулярное выражение для поиска формул между $$ в Markdown
-    private static final String LATEX_PATTERN = "(?<=\\$\\$)(.*?)(?=\\$\\$)";
-    // Регулярное выражение для поиска русских букв
-    private static final String RUSSIAN_PATTERN = "[а-яА-Я]";
-
     public void parseMarkdownAndSaveFormulas(String mdFilePath) {
         try (BufferedReader reader = new BufferedReader(new FileReader(mdFilePath))) {
             String line;
@@ -25,23 +18,30 @@ public class MarkdownParser {
             }
 
             String text = sb.toString();  // Все строки в один текст
-            System.out.println("Извлеченный текст: " + text);  // Выводим текст для проверки
 
-            // Поиск формул с использованием регулярного выражения
-            Pattern pattern = Pattern.compile(LATEX_PATTERN);
-            Matcher matcher = pattern.matcher(text);
+            // Регулярка для формул в "блоке", содержащих "="
+            String blockRegex = "\\${2}(?=.*=)([\\s\\S]*?)\\${2}";
+            Pattern blockPattern = Pattern.compile(blockRegex);
+            Matcher blockMatcher = blockPattern.matcher(text);
 
-            DatabaseHandler dbHandler = new DatabaseHandler();
+            System.out.println("Формулы в блоках (с =):");
+            while (blockMatcher.find()) {
+                String formula = blockMatcher.group(1).trim();
+                if (!formula.isEmpty()) {  // Проверяем, что строка не пустая
+                    System.out.println(formula);
+                }
+            }
 
-            // Обработка всех найденных формул
-            while (matcher.find()) {
-                String formula = matcher.group().trim();
+            // Регулярка для формул в строке, содержащих "="
+            String inlineRegex = "\\$(?=.*=)(.*?)\\$";
+            Pattern inlinePattern = Pattern.compile(inlineRegex);
+            Matcher inlineMatcher = inlinePattern.matcher(text);
 
-                // Пропуск формул, содержащих русские буквы
-                if (!formula.isEmpty() && !containsRussianLetters(formula)) {
-                    System.out.println("Найдена формула: " + formula);  // Выводим формулу для проверки
-                    // Добавление формулы в базу данных
-                    dbHandler.addFormula(formula);
+            System.out.println("Формулы в строках (с =):");
+            while (inlineMatcher.find()) {
+                String formula = inlineMatcher.group(1).trim();
+                if (!formula.isEmpty()) {  // Проверяем, что строка не пустая
+                    System.out.println(formula);
                 }
             }
 
@@ -50,12 +50,4 @@ public class MarkdownParser {
             System.out.println("Ошибка при обработке Markdown файла.");
         }
     }
-
-    // Метод для проверки наличия русских букв в формуле
-    private boolean containsRussianLetters(String formula) {
-        Pattern pattern = Pattern.compile(RUSSIAN_PATTERN);
-        Matcher matcher = pattern.matcher(formula);
-        return matcher.find();
-    }
-
 }

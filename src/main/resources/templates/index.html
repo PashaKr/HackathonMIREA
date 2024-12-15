@@ -58,7 +58,7 @@
 
 <!-- Кнопки для работы с базой данных -->
 <div class="database-buttons" style="margin-top: 20px; display: flex; gap: 5px">
-    <button id="saveFormulaButton" type="button" class="btn btn-warning">Сохранить формулу</button>
+    <button id="saveFormulaButton" type="button" class="btn btn-warning" data-bs-target="#similarFormulaModal">Сохранить формулу</button>
     <button
             id="loadFormulasButton" type="button" class="btn btn-info" data-bs-toggle="modal"
             data-bs-target="#formulasModal">Показать сохранённые формулы
@@ -72,7 +72,6 @@
 </form>
 
 <!-- Модальные окна -->
-
 <th:block th:insert="~{fragments/modal_constructions :: modal}"></th:block>
 <th:block th:insert="~{fragments/modal_symbols :: modal}"></th:block>
 <th:block th:insert="~{fragments/modal_operators :: modal}"></th:block>
@@ -81,6 +80,7 @@
 <th:block th:insert="~{fragments/modal_matrices :: modal}"></th:block>
 <th:block th:insert="~{fragments/modal_modifications :: modal}"></th:block>
 <th:block th:insert="~{fragments/modal_formulas :: modal}"></th:block>
+<th:block th:insert="~{fragments/modal_similar_formula :: modal}"></th:block>
 
 <!-- Динамическое отображение LaTeX формулы -->
 <div>

@@ -8,19 +8,43 @@ document.getElementById("saveFormulaButton").addEventListener("click", () => {
         },
         body: JSON.stringify({ formula: formula }),
     }).then(response => {
-        if (response.ok) { // Если статус 2xx
-            return response.text();
+        if (response.ok) {
+            return response.json();
         } else {
-            return response.text().then(text => {
-                throw new Error(text);
+            return response.json().then(json => {
+                throw new Error(json.message || "Ошибка сохранения.");
             });
         }
-    }).then(message => {
-        alert(message);
+    }).then(data => {
+        if (data.status === "success") {
+            alert(data.message);
+        } else if (data.status === "similar") {
+            showSimilarFormulaModal(data.similarFormula); // Показать модальное окно с похожей формулой
+        } else {
+            alert(data.message);
+        }
     }).catch(error => {
         alert("Ошибка: " + error.message);
     });
 });
+
+// Функция для отображения модального окна с похожей формулой
+function showSimilarFormulaModal(similarFormula) {
+    const modalBody = document.getElementById("similarFormulaModalBody");
+    modalBody.innerHTML = `Похожая формула найдена: $$${similarFormula}$$`;
+
+    // Рендеринг формулы с KaTeX
+    renderMathInElement(modalBody, {
+        delimiters: [
+            { left: "$$", right: "$$", display: true },
+            { left: "\\(", right: "\\)", display: false }
+        ]
+    });
+
+    const modal = new bootstrap.Modal(document.getElementById("similarFormulaModal"));
+    modal.show();
+}
+
 
 // Обработчик для загрузки сохранённых формул
 document.getElementById("loadFormulasButton").addEventListener("click", () => {
